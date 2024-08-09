@@ -1,0 +1,37 @@
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
+
+
+server:
+  port: 8765
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: https://eurekaregistry-production.up.railway.app/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
